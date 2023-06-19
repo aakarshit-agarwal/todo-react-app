@@ -19,6 +19,7 @@ class ToDo extends Component {
         newTodoList.push(this.state.todo);
 
         this.setState({
+            todo: '',
             todoList: newTodoList,
         });
         console.log(this.state);
@@ -36,6 +37,11 @@ class ToDo extends Component {
                     />
                     <button type='submit'>Add</button>
                 </form>
+                <>
+                    {this.state.todoList.map((item) => {
+                        return <h3>{item}</h3>;
+                    })}
+                </>
             </>
         );
     }
