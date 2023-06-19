@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import ListItem from './ListItem';
 
 class ToDo extends Component {
     state = {
@@ -39,7 +40,7 @@ class ToDo extends Component {
                 </form>
                 <>
                     {this.state.todoList.map((item) => {
-                        return <h3>{item}</h3>;
+                        return <ListItem key={item} itemName={item}></ListItem>;
                     })}
                 </>
             </>
