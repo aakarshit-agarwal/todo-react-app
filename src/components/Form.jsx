@@ -1,54 +1,37 @@
-import { Component } from 'react';
 import styles from '../style.module.css';
+import TodoList from './TodoList';
+import shortid from 'shortid';
 
-class Form extends Component {
-    state = {
-        todo: '',
-        todoList: [],
+const Form = ({ todo, setTodo, todoList, setTodoList }) => {
+    const handleAddInputChange = (event) => {
+        setTodo(event.target.value);
     };
 
-    handleAddInputChange = (event) => {
-        this.setState({
-            todo: event.target.value,
-        });
-        console.log(this.state);
-    };
-
-    handleAddFormSubmit = (event) => {
+    const handleAddFormSubmit = (event) => {
         event.preventDefault();
-        let newTodoList = this.state.todoList;
-        newTodoList.push(this.state.todo);
-
-        this.setState({
-            todo: '',
-            todoList: newTodoList,
-        });
-        console.log(this.state);
+        setTodoList([...todoList, { id: shortid.generate(), name: todo }]);
+        setTodo('');
     };
 
-    render() {
-        return (
+    return (
+        <div>
             <div className={styles.todoForm}>
-                <form onSubmit={this.handleAddFormSubmit}>
+                <form onSubmit={handleAddFormSubmit}>
                     <input
                         type='text'
                         placeholder='Add Todo Item'
                         className={styles.todoInput}
-                        value={this.state.todo}
-                        onChange={this.handleAddInputChange}
+                        value={todo}
+                        onChange={handleAddInputChange}
                     />
                     <button type='submit' className={styles.addButton}>
                         Add
                     </button>
                 </form>
-                {/* <>
-                    {this.state.todoList.map((item) => {
-                        return <ListItem key={item} itemName={item}></ListItem>;
-                    })}
-                </> */}
             </div>
-        );
-    }
-}
+            <TodoList todoList={todoList} setTodoList={setTodoList}></TodoList>
+        </div>
+    );
+};
 
 export default Form;
