@@ -1,15 +1,11 @@
 import { Component } from 'react';
+import styles from './header.module.css';
 
 class Header extends Component {
-    headerStyle = {
-        color: 'blue',
-        fontSize: '40px',
-    };
-
     render() {
         return (
             <>
-                <h1 style={this.headerStyle}>ToDo React App</h1>
+                <h1 className={styles.header}>ToDo React App</h1>
             </>
         );
     }
