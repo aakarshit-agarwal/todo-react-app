@@ -1,20 +1,20 @@
 import { Component } from 'react';
-import ListItem from './ListItem';
+import styles from '../style.module.css';
 
-class ToDo extends Component {
+class Form extends Component {
     state = {
         todo: '',
         todoList: [],
     };
 
-    handleAddTodoInputChange = (event) => {
+    handleAddInputChange = (event) => {
         this.setState({
             todo: event.target.value,
         });
         console.log(this.state);
     };
 
-    handleAddTodoFormSubmit = (event) => {
+    handleAddFormSubmit = (event) => {
         event.preventDefault();
         let newTodoList = this.state.todoList;
         newTodoList.push(this.state.todo);
@@ -28,24 +28,27 @@ class ToDo extends Component {
 
     render() {
         return (
-            <>
-                ToDo
-                <form onSubmit={this.handleAddTodoFormSubmit}>
+            <div className={styles.todoForm}>
+                <form onSubmit={this.handleAddFormSubmit}>
                     <input
                         type='text'
+                        placeholder='Add Todo Item'
+                        className={styles.todoInput}
                         value={this.state.todo}
-                        onChange={this.handleAddTodoInputChange}
+                        onChange={this.handleAddInputChange}
                     />
-                    <button type='submit'>Add</button>
+                    <button type='submit' className={styles.addButton}>
+                        Add
+                    </button>
                 </form>
-                <>
+                {/* <>
                     {this.state.todoList.map((item) => {
                         return <ListItem key={item} itemName={item}></ListItem>;
                     })}
-                </>
-            </>
+                </> */}
+            </div>
         );
     }
 }
 
-export default ToDo;
+export default Form;
